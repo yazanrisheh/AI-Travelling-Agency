@@ -3,7 +3,7 @@ from textwrap import dedent
 from langchain.llms import OpenAI, Ollama
 from langchain_openai import ChatOpenAI
 
-from tools.search_tool import SearchTools
+from tools.search_tool import search_tool
 from tools.calculator_tool import CalculatorTool
 
 # You can define as many agents as you want.
@@ -23,12 +23,12 @@ class TravelAgents:
             goal=dedent(f"""Create a 7-day itinerary plan with detailed per plans, include budget,
                         packing suggestions, and cultural etiquette.
                         """),
-            tools=[SearchTools.search_internet,
+            tools=[search_tool,
                    CalculatorTool.calculate
                    ],
             allow_delegation=False,
             verbose=True,
-            llm=self.OpenAIGPT4,
+            llm=self.OpenAIGPT35,
         )
 
     def city_selection_expert(self):
@@ -37,10 +37,10 @@ class TravelAgents:
             backstory=dedent(f"""Expert at analyzing travel data to pick ideal destinations"""),
             goal=dedent(f"""Select the best cities based on weather,
                         season, prices, and travel interests"""),
-            tools=[SearchTools.search_internet],
+            tools=[search_tool],
             allow_delegation=False,
             verbose=True,
-            llm=self.OpenAIGPT4,
+            llm=self.OpenAIGPT35,
         )
     #This is local tour guide which is generic cuz city input can be diff
     def local_tour_guide(self):
@@ -51,8 +51,8 @@ class TravelAgents:
                                """),
             goal = dedent(f"""Provide the BEST insights about the selected city
                           """),
-            tools = [SearchTools.search_internet],
+            tools = [search_tool],
             allow_delegation = False,
             verbose = True,
-            llm = self.OpenAIGPT4
+            llm = self.OpenAIGPT35
         )
