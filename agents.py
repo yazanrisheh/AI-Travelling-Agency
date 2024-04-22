@@ -28,7 +28,7 @@ class TravelAgents:
                    ],
             allow_delegation=False,
             verbose=True,
-            llm=self.OpenAIGPT4,
+            llm=self.OpenAIGPT35,
         )
 
     def city_selection_expert(self):
@@ -40,7 +40,7 @@ class TravelAgents:
             tools=[search_tool],
             allow_delegation=False,
             verbose=True,
-            llm=self.OpenAIGPT4,
+            llm=self.OpenAIGPT35,
         )
     #This is local tour guide which is generic cuz city input can be diff
     def local_tour_guide(self):
@@ -54,5 +54,5 @@ class TravelAgents:
             tools = [search_tool],
             allow_delegation = False,
             verbose = True,
-            llm = self.OpenAIGPT4
+            llm = self.OpenAIGPT35
         )
