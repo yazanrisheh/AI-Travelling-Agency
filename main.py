@@ -78,7 +78,7 @@ class TripCrew:
 
 # This is the main function that you will use to run your custom crew.
 if __name__ == "__main__":
-    st.title("RAAFYA International Travelling Agency")
+    st.title("RAAFYA International Travelling Agency ✈️")
     first_name = st.text_input(dedent("What is your first name? "))
     last_name = st.text_input(dedent("What is your last name? "))
     origin = st.text_input(dedent("""Where will you be travelling from? e.g. Abu Dhabi, UAE: """))
