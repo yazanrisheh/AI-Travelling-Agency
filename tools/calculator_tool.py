@@ -1,0 +1,36 @@
+from langchain.tools import tool
+from pydantic import BaseModel, Field
+
+
+# class CalculationInput(BaseModel):
+#     operation: str = Field(..., description = "The mathematical operation to perform")
+#     factor: float = Field(..., description = "A factor by which to multiply the result of the operation")
+
+# @tool("perform_calculation", args_schema = CalculationInput, return_direct = True)
+# def perform_calculation(operation: str, factor: float) -> str:
+#     """
+#     Performs a specified mathematical operation and multiplies the result by a given factor
+
+#     Parameters:
+#     operation: str : The mathematical operation to perform (e.g, '10 + 5')
+#     factor: float : A factor by which to multiply the result of the operation
+
+#     Returns:
+#     A string representation of the result
+#     """
+#     result = eval(operation) * factor
+
+#     return f"The result of '{operation}' multiplied by {factor} is {result}."
+
+
+class CalculatorTool():
+    @tool("Make a calculation")
+    def calculate(operation):
+        """Useful to perform any mathematical calculations like sum, minus, multiplication, division, etc...
+        The input to this tool should be a mathematical expression, a couple examples are
+        '200*7' or '5000/2*10'
+        """
+        try:
+            return eval(operation)
+        except SyntaxError:
+            return "Error: Invalid syntax in mathematical expression"
