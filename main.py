@@ -7,6 +7,8 @@ from textwrap import dedent
 from agents import TravelAgents
 from tasks import TravelTasks
 
+import streamlit as st
+
 load_dotenv()
 
 # This is the main class that you will use to define your custom crew.
@@ -76,16 +78,40 @@ class TripCrew:
 
 # This is the main function that you will use to run your custom crew.
 if __name__ == "__main__":
-    print("## Welcome to Raafya International Travelling Agency")
-    print("-------------------------------")
-    origin = input(dedent("""Where will you be travelling from? e.g. Abu Dhabi, UAE: """))
-    cities = input(dedent("""What country are you interested in visiting? """))
-    starting_date = input(dedent("What day would you like to go? e.g. March 15: "))
-    departure_date = input(dedent("What day would you like to come back? e.g. March 18: "))
-    interests = input(dedent("What are some of your high level interests and hobbies? e.g. Ice skating, Hiking, Yoga: "))
+    st.title("RAAFYA International Travelling Agency")
+    first_name = st.text_input(dedent("What is your first name? "))
+    last_name = st.text_input(dedent("What is your last name? "))
+    origin = st.text_input(dedent("""Where will you be travelling from? e.g. Abu Dhabi, UAE: """))
+    cities = st.text_input(dedent("""What country are you interested in visiting? """))
+    starting_date = st.text_input(dedent("What day would you like to go? e.g. March 15: "))
+    departure_date = st.text_input(dedent("What day would you like to come back? e.g. March 18: "))
+    interests = st.text_input(dedent("What are some of your high level interests and hobbies? e.g. Ice skating, Hiking, Yoga: "))
     trip_crew = TripCrew(origin, cities, starting_date, departure_date, interests)
-    result = trip_crew.run()
-    print("\n\n########################")
-    print("## Here is you Trip Plan")
-    print("########################\n")
-    print(result)
+
+    if st.button("Start Generation"):
+        with st.spinner("Generating your plan..."):
+            result = trip_crew.run()
+            # Write the result to a text file
+            with open(f"{first_name}_{last_name}'s plan.txt", "w") as text_file:
+                text_file.write(result)
+            # Display a success message
+            st.success("Plan generated successfully!")
+            # Add a download button for the text file
+            st.download_button(label="Download", data=result, file_name=f"{first_name}_{last_name}'s plan.txt", mime="text/plain")
+
+
+# Without streamlit uncomment this and comment above
+
+    # print("## Welcome to Raafya International Travelling Agency")
+    # print("-------------------------------")
+    # origin = input(dedent("""Where will you be travelling from? e.g. Abu Dhabi, UAE: """))
+    # cities = input(dedent("""What country are you interested in visiting? """))
+    # starting_date = input(dedent("What day would you like to go? e.g. March 15: "))
+    # departure_date = input(dedent("What day would you like to come back? e.g. March 18: "))
+    # interests = input(dedent("What are some of your high level interests and hobbies? e.g. Ice skating, Hiking, Yoga: "))
+    # trip_crew = TripCrew(origin, cities, starting_date, departure_date, interests)
+    # result = trip_crew.run()
+    # print("\n\n########################")
+    # print("## Here is you Trip Plan")
+    # print("########################\n")
+    # print(result)
