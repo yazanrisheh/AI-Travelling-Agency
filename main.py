@@ -92,7 +92,7 @@ if __name__ == "__main__":
         with st.spinner("Generating your plan..."):
             result = trip_crew.run()
             # Write the result to a text file
-            with open(f"{first_name}_{last_name}'s plan.txt", "w") as text_file:
+            with open(f"{first_name}_{last_name}'s plan.txt", "w", encoding='utf-8') as text_file:
                 text_file.write(result)
             # Display a success message
             st.success("Plan generated successfully!")

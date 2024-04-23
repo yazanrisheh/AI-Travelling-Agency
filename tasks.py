@@ -36,7 +36,10 @@ class TravelTasks:
         """
             ),
             agent=agent,
-            expected_output = dedent("Create a structured format plan ")
+            expected_output = dedent("""
+                                     Create a structured format plan separated by days.
+                                     Example:
+                                     """)
         )
 
     def identify_city(self, agent, origin, cities, interests, starting_date, departure_date):
