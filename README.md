@@ -7,3 +7,4 @@ Upcoming features:
 4) Divide the plan per day with timing
 5) Add cultural norms to watch out for
 6) Tips/advices to avoid getting scammed in local country
+7) Add https://www.iata.org/en/search/?page=2&search=api so that user can know if he requires visa or not
