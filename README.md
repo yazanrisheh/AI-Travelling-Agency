@@ -13,6 +13,7 @@ Upcoming features:
 10) Add conditions if user selected date that already passed
 11) Add condition if user clicked start generation without filling form
 12) Add passport and see if it requires visa or no
+13) Add https://www.iata.org/en/search/?page=2&search=api so that user can know if he requires visa or not
 
 
 Completed:
