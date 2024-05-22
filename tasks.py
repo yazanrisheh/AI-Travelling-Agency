@@ -9,7 +9,7 @@ class TravelTasks:
     def __tip_section(self):
         return "If you do your BEST WORK, I'll give you a $10,000 commission!"
 
-    def plan_itinerary(self, agent, city, starting_date, departure_date, interests):
+    def plan_itinerary(self, agent, city, starting_date, departure_date, interests, budget):
         return Task(
             description=dedent(
                 f"""
@@ -22,37 +22,52 @@ class TravelTasks:
             a budget breakdown. You MUST suggest actual places to visit, actual hotels
             to stay, and actual restaurants to go to. This itinerary should cover all aspects of the trip,
             from arrival to departure, integrating the city guide information with practical 
-            travel logistics.
+            travel logistics. If there is any special events going on in between the arrival and departure date
+            then clearly mention it and all that's associated to it including the price if there is.
+            Every price must always be calculated in USD
+
+            **Key Point**:
+            The budget provided by the traveller includes everything including the following:
+            1)Flight tickets
+            2) Accomodation
+            3) Places to eat
+            4) Trips
+            5) Entrance price depending on the trip
+            6) Estimated price for buying souvenirs
 
             **Parameters**:
             City:{city}
             Arrival Date: {starting_date}
             Departure Date: {departure_date}
-            Traveler Interests: {interests}
+            Traveller Interests: {interests}
+            Traveller Budget: {budget}
 
             **Note**: {self.__tip_section()}
             
-            {self.__tip_section()}
         """
             ),
             agent=agent,
             expected_output = dedent("""
-                                     Create a structured format plan separated by days.
-                                     Example:
+                                     A detailed structured plan separated by each day
                                      """)
         )
+    
+    # Add more details in expected_output what is the agent gona put out when its done
+    # Template for my result to be
+    #Check context to pass the output explicitly
 
-    def identify_city(self, agent, origin, cities, interests, starting_date, departure_date):
+    def identify_city(self, agent, origin, cities, interests, starting_date, departure_date, budget):
         return Task(
             description=dedent(
                 f"""
             **Task**: Identify the Best City for the Trip
-            **Description**: Analyze and select the best city for the trip based on 
-            specific criteria such as weather patterns, seasonal events, and travel costs.
+            **Description**: Analyze and select the best city for the trip primarily based on the budget provided
+            followed by specific criteria such as weather patterns, seasonal events.
             This task involves comparing multiple cities, considering factors like current weather
             conditions, upcoming cultural or seasonal events, and overall travel expenses.
             Your final answer must be a detailed report on the chosen city,
             including actual flight costs, weather forecast, and attractions.
+            Every price must always be calculated in USD
 
             **Parameters**:
             Origin: {origin}
@@ -60,6 +75,7 @@ class TravelTasks:
             Interests: {interests}
             Arrival Date: {starting_date}
             Departure Date: {departure_date}
+            Travellers Budget: {budget}
 
                                     
             **Note**: {self.__tip_section()}
@@ -72,7 +88,7 @@ class TravelTasks:
         """)
         )
     
-    def gather_city_info(self, agent, city, starting_date, departure_date, interests):
+    def gather_city_info(self, agent, city, starting_date, departure_date, interests, budget):
         return Task(
             description = dedent(
                 f"""
@@ -81,13 +97,14 @@ class TravelTasks:
                 key attractions, local customs, special events, and daily activity recommendations.
                 This guide should provide a thorough overview of what the city has to offer, including
                 hidden gems, cultural hotspots, must-visit landmarks, weather forecasts,
-                and high-level costs.
+                and high-level costs. Every price must always be calculated in USD
 
                 **Parameters**:
                 Cities : {city}
                 Interests: {interests}
                 Arrival Date: {starting_date}
                 Departure Date: {departure_date}
+                Travellers budget: {budget}
 
                 **Note**: {self.__tip_section()}
                 """
